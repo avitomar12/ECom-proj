@@ -36,6 +36,10 @@ public class ProductController {
     }
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable int id){
+        Product product = service.getProductById(id);
+        if(product == null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(service.getProductById(id), HttpStatus.OK);
     }
 }
